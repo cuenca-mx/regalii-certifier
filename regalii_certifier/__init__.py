@@ -1,1 +1,1 @@
-from . import db, models
+from . import certifications, db, models
