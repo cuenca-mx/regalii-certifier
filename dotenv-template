@@ -1,0 +1,4 @@
+# Template for .env file
+DATABASE_URI=
+REGALII_API_KEY=
+REGALII_SECRET_KEY=
