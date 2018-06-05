@@ -6,7 +6,7 @@ PYTHON=python3.6
 default: install-dev
 
 venv:
-		$(PYTHON) -m venv --prompt kiva_data venv
+		$(PYTHON) -m venv venv
 
 clean:
 		rm -rf venv/

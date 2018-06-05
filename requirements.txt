@@ -2,3 +2,4 @@ psycopg2
 SQLAlchemy
 aiohttp
 requests
+git+https://github.com/cuenca-mx/regaliator_python.git@python3.6#egg=regaliator_python
