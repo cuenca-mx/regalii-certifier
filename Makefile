@@ -7,6 +7,8 @@ default: install-dev
 
 venv:
 		$(PYTHON) -m venv venv
+		source venv/bin/activate
+		pip install --quiet --upgrade pip
 
 clean:
 		rm -rf venv/
