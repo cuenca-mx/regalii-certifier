@@ -19,7 +19,5 @@ install: venv
 install-dev: install
 		pip install --quiet --upgrade -r requirements-dev.txt
 
-pep8:
-		pep8 kiva/
-
-lint: pep8
+lint:
+		pycodestyle regalii_certifier/
