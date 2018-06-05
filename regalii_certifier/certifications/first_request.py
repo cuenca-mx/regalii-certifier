@@ -1,4 +1,4 @@
-from ..client import client as client
+from regalii_certifier.client import client
 
 
 def get_account_balance():
