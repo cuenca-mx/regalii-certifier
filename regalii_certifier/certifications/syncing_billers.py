@@ -22,12 +22,3 @@ def etl_from_endpoint(endpoint, page=1):
 def etl_billers():
     for endpoint in ENDPOINTS:
         etl_from_endpoint(endpoint)
-
-
-def verify_biller_count():
-    total_entries = 0
-    for endpoint in ENDPOINTS:
-        resp = client.biller.request(f'/billers/{endpoint}').get()
-        total_entries += json.loads(resp.pagination())['total_entries']
-    local_count = Biller.query.count()
-    assert local_count == total_entries
