@@ -23,4 +23,4 @@ lint:
 		pycodestyle regalii_certifier tests
 
 certifications:
-		pytest
+		pytest -v
