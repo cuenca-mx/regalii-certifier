@@ -73,3 +73,22 @@ def test_create_with_mfa_code():
     assert resp.response.status_code == 200
     bill = resp.data()
     assert bill['status'] == 'linked'
+
+
+def test_invalid_credentials():
+    """https://www.arcusfi.com/api/v3/?ruby#linking-bill-invalid-credentials"""
+    params = dict(biller_id=6500, login='credentials', password='credentials')
+    resp = client.bill.create(params=params)
+    assert resp.response.status_code == 422
+
+
+def test_refreshing_a_bill():
+    """https://www.arcusfi.com/api/v3/?ruby#refreshing-a-bill"""
+    params = dict(biller_id=6500, login='user', password='letmein')
+    resp = client.bill.create(params=params)
+    bill = resp.data()
+
+    resp = client.bill.refresh(bill['id'])
+    assert resp.response.status_code == 200
+    refreshed_bill = resp.data()
+    assert bill['balance'] != refreshed_bill['balance']
