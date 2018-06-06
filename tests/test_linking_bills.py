@@ -35,3 +35,22 @@ def test_create_bill_and_wait():
     assert bill['status'] == 'linked'
 
 
+def test_create_with_mfa_question():
+    """https://www.arcusfi.com/api/v3/?ruby#linking-bill-mfa-question"""
+    params = dict(biller_id=6500, login='user', password='challengeme')
+    resp = client.bill.create(params=params)
+    assert resp.response.status_code == 201
+    bill = resp.data()
+    assert bill['status'] == 'mfa'
+
+    mfa_challenge = bill['mfa_challenges'][0]
+    mfa_response = dict(
+        id=mfa_challenge['id'],
+        type=mfa_challenge['type'],
+        response='8')
+    resp = client.bill.update(
+        bill['id'], params=dict(mfa_challenges=[mfa_response]))
+    assert resp.response.status_code == 200
+    bill = resp.data()
+    assert bill['status'] == 'linked'
+
