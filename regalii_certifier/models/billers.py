@@ -7,8 +7,6 @@ class Biller(Base):
     __tablename__ = 'billers'
 
     id = Column(Integer, primary_key=True, autoincrement=False)
-    uuid = Column(String)
-    type = Column(String)
     name = Column(String)
     country = Column(String)
     currency = Column(String)
@@ -18,7 +16,6 @@ class Biller(Base):
     returned_parameters = Column(JSON)
     can_migrate = Column(Boolean)
     has_xdata = Column(Boolean)
-    charge_user = Column(Boolean)
 
     @classmethod
     def transform(cls, biller_dict):

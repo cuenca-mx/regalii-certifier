@@ -1,4 +1,5 @@
 psycopg2-binary
 SQLAlchemy
 requests
+pytest
 git+https://github.com/cuenca-mx/regaliator_python.git@python3.6#egg=regalii

@@ -3,7 +3,7 @@ PATH := ./venv/bin:${PATH}
 PYTHON=python3.6
 
 
-default: install-dev
+default: install
 
 venv:
 		$(PYTHON) -m venv venv
@@ -20,4 +20,7 @@ install-dev: install
 		pip install --quiet --upgrade -r requirements-dev.txt
 
 lint:
-		pycodestyle regalii_certifier/
+		pycodestyle regalii_certifier tests
+
+certifications:
+		pytest
