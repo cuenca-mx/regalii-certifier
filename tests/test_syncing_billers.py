@@ -19,7 +19,7 @@ def get_total_billers():
 
 
 def test_syncing_billers():
+    Base.metadata.drop_all()
     Base.metadata.create_all()
     syncing_billers.etl_billers()
     assert get_total_billers() == Biller.query.count()
-    Base.metadata.drop_all()

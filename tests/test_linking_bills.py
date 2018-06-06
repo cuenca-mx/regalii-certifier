@@ -92,3 +92,10 @@ def test_refreshing_a_bill():
     assert resp.response.status_code == 200
     refreshed_bill = resp.data()
     assert bill['balance'] != refreshed_bill['balance']
+
+
+def test_getting_xdata():
+    """https://www.arcusfi.com/api/v3/?ruby#getting-xdata"""
+    params = dict(biller_id=6500, login='user_xdata', password='letmein')
+    resp = client.bill.create(params=params)
+    assert resp.response.status_code == 200
