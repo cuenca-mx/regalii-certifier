@@ -30,10 +30,17 @@ def create_bill(biller_id, account_number):
     return resp, bill
 
 
-def pay_bill(bill):
-    params = dict(amount=bill['balance'], currency=bill['balance_currency'])
-    resp = client.bill.pay(bill['id'], params=params)
+def pay_bill(bill_id, amount, currency):
+    params = dict(amount=amount, currency=currency)
+    resp = client.bill.pay(bill_id, params=params)
     transaction = resp.data()
+    return resp, transaction
+
+
+def show_transaction(transaction_id):
+    resp = client.transaction.request(
+        f'/transactions?q[id_eq]={transaction_id}').get()
+    transaction = resp.data()['transactions'][0]
     return resp, transaction
 
 

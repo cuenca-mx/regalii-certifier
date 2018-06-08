@@ -13,14 +13,6 @@ def test_create_with_credentials():
     assert bill['status'] == 'linked'
 
 
-def test_create_by_account_number():
-    """https://www.arcusfi.com/api/v3/#linking-bill-creation"""
-    resp, bill = create_bill(40, '501000000007')
-    assert resp.response.status_code == 200
-    assert bill['id']
-    assert bill['status'] == 'linked'
-
-
 def test_create_bill_and_wait():
     """https://www.arcusfi.com/api/v3/#linking-bill-slow"""
     params = dict(biller_id=6500, login='slow', password='slow')
