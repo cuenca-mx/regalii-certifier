@@ -50,3 +50,12 @@ def test_cancel_bill():
     assert resp.response.status_code == 200
     assert updated_transaction['id'] == transaction['id']
     assert updated_transaction['status'] == 'refunded'
+
+
+def test_consult_error():
+    """Similar to unexpected error"""
+    with pytest.raises(RegaliiException) as excinfo:
+        create_bill(2901, '1111322016')
+    err = excinfo.value
+    assert err.code == 'R16'
+    assert err.message == 'Failed to make the consult, please try again later'
