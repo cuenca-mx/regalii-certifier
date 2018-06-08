@@ -24,3 +24,6 @@ lint:
 
 certifications:
 		pytest -v
+
+mexican-certifications:
+		pytest -v tests/test_mexican_suite.py
