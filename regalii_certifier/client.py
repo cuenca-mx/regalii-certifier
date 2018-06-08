@@ -28,3 +28,18 @@ def create_bill(biller_id, account_number):
         raise RegaliiException(data['code'], data['message'])
     bill = resp.data()
     return resp, bill
+
+
+def pay_bill(bill):
+    params = dict(amount=bill['balance'], currency=bill['balance_currency'])
+    resp = client.bill.pay(bill['id'], params=params)
+    transaction = resp.data()
+    return resp, transaction
+
+
+def cancel_transaction(transaction_id):
+    req = client.transaction.request(
+        '/transaction/cancel', params=dict(id=transaction_id))
+    resp = req.post()
+    cancellation = resp.data()
+    return resp, cancellation
