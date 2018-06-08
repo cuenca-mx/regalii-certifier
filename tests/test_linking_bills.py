@@ -1,4 +1,6 @@
-from regalii_certifier.client import client
+import time
+
+from regalii_certifier.client import client, create_bill
 
 
 def test_create_with_credentials():
@@ -13,10 +15,8 @@ def test_create_with_credentials():
 
 def test_create_by_account_number():
     """https://www.arcusfi.com/api/v3/#linking-bill-creation"""
-    params = dict(biller_id=8925, login='user', account_number='1234567')
-    resp = client.bill.create(params=params)
+    resp, bill = create_bill(40, '501000000007')
     assert resp.response.status_code == 200
-    bill = resp.data()
     assert bill['id']
     assert bill['status'] == 'linked'
 
@@ -29,6 +29,7 @@ def test_create_bill_and_wait():
     bill = resp.data()
     assert bill['status'] == 'fetching'
     while bill['status'] == 'fetching':
+        time.sleep(5)
         resp = client.bill.show(bill['id'])
         bill = resp.data()
     assert resp.response.status_code == 200

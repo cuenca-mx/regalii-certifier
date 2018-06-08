@@ -2,14 +2,12 @@
 Payments
 https://www.arcusfi.com/api/v3/#payments-optional
 """
-from regalii_certifier.client import client
+from regalii_certifier.client import client, create_bill
 
 
 def test_payments():
-    params = dict(biller_id=6500, login='user', password='letmein')
-    resp = client.bill.create(params=params)
+    resp, bill = create_bill(40, '501000000007')
     assert resp.response.status_code == 200
-    bill = resp.data()
     assert bill['id']
     assert bill['status'] == 'linked'
 
@@ -18,4 +16,4 @@ def test_payments():
     assert resp.response.status_code == 201
     transaction = resp.data()
     assert transaction['id']
-    assert transaction['status'] == 'sent'
+    assert transaction['status'] == 'fulfilled'
