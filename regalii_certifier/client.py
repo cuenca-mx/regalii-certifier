@@ -33,6 +33,9 @@ def create_bill(biller_id, account_number):
 def pay_bill(bill_id, amount, currency):
     params = dict(amount=amount, currency=currency)
     resp = client.bill.pay(bill_id, params=params)
+    if resp.fail():
+        data = resp.data()
+        raise RegaliiException(data['code'], data['message'])
     transaction = resp.data()
     return resp, transaction
 

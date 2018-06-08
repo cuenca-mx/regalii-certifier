@@ -69,3 +69,11 @@ def test_biller_maintenance():
     assert err.message == (
         'Biller maintenance in progress, please try again later')
 
+
+def test_timeout_on_payment():
+    _, bill = create_bill(37, '2424240024')
+    with pytest.raises(RegaliiException) as excinfo:
+        pay_bill(bill['id'], bill['balance'], bill['balance_currency'])
+    err = excinfo.value
+    assert err.code == 'R24'
+    assert err.message == 'Timeout from biller'
