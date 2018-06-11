@@ -6,7 +6,7 @@ from regalii.regaliator import Regaliator
 
 API_KEY = os.environ['REGALII_API_KEY']
 SECRET_KEY = os.environ['REGALII_SECRET_KEY']
-HOST = 'api.casiregalii.com'
+HOST = os.environ['REGALII_HOST']
 VERSION = '3.1'
 
 config = Configuration(API_KEY, SECRET_KEY, HOST, version=VERSION)
